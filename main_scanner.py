@@ -10,29 +10,19 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 import shlex
 
-# Get the directory where the current script is located
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-
 # --- Configuration ---
-# Tool paths - Adjust these if your tools are located elsewhere or not in PATH
-# Assumes 'subfinder' and 'payload' are directories sibling to this script or within the project structure relative to this script
-SUBFINDER_SCRIPT = os.path.join(SCRIPT_DIR, 'subfinder', 'main.py')
-SQLI_PAYLOADS = os.path.join(SCRIPT_DIR, 'payload', 'SQL Injection (SQLi) Payloads.txt')
-XSS_PAYLOADS = os.path.join(SCRIPT_DIR, 'payload', 'Cross-Site Scripting (XSS) Payloads.txt')
-LFI_PAYLOADS = os.path.join(SCRIPT_DIR, 'payload', 'Local File Inclusion (LFI) Payloads.txt')
+# Make sure these paths are correct relative to where you run the script
+SUBFINDER_SCRIPT = os.path.join('subfinder', 'main.py')
+SQLI_PAYLOADS = os.path.join('payload', 'SQL Injection (SQLi) Payloads.txt')
+XSS_PAYLOADS = os.path.join('payload', 'Cross-Site Scripting (XSS) Payloads.txt')
+LFI_PAYLOADS = os.path.join('payload', 'Local File Inclusion (LFI) Payloads.txt')
+# Assumed commands/scripts for the tools
+WAYBACKURLS_CMD = "waybackurls" # Assumes waybackurls is in PATH
+SQLMAP_CMD = "sqlmap"           # Assumes sqlmap is in PATH
+XSSTRIKE_CMD = "xsstrike"       # Assumes xsstrike is in PATH
+LFI_FINDER_SCRIPT = "lfi_finder.py" # Assume this script exists in the current dir or PATH
 
-# Commands/Scripts - Assumes these are either in system PATH or located relative to this script
-# Example: Place executables/scripts in a 'tools' subdir sibling to this script and update the path here.
-# If in PATH, just use the command name (e.g., "waybackurls").
-# If relative, use os.path.join(SCRIPT_DIR, 'tools', 'waybackurls') or similar.
-# *** YOU MUST ENSURE THESE ARE CORRECT FOR YOUR SYSTEM ***
-WAYBACKURLS_CMD = "waybackurls"         # Default: Assumes in PATH. Modify if installed elsewhere (e.g., os.path.join(SCRIPT_DIR, 'tools', 'waybackurls'))
-SQLMAP_CMD = "sqlmap"                 # Default: Assumes in PATH. Modify if needed.
-XSSTRIKE_CMD = "xsstrike"             # Default: Assumes in PATH. Modify if needed.
-# Assumes lfi_finder.py is in the same directory as this script
-LFI_FINDER_SCRIPT = os.path.join(SCRIPT_DIR, "lfi_finder.py") # Modify if it's elsewhere.
-
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, "scan_results") # Output relative to script dir
+OUTPUT_DIR = "scan_results"
 SQLMAP_OUTPUT_DIR = os.path.join(OUTPUT_DIR, "sqlmap_logs")
 MAX_WORKERS = 10 # Number of concurrent scans
 REQUEST_TIMEOUT = 10 # Timeout in seconds for individual tool checks where applicable
@@ -371,4 +361,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main() 
+    main()
